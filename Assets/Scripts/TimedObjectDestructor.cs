@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TimedObjectDestructor : MonoBehaviour {
 
-	public float timeOut = 1.0f;
+	public float timeOut = 3.0f;
 	public bool detachChildren = false;
 
 	// Use this for initialization
@@ -22,6 +22,6 @@ public class TimedObjectDestructor : MonoBehaviour {
 		if (detachChildren) { // detach the children before destroying if specified
 			transform.DetachChildren ();
 		}
-		DestroyObject (gameObject);
+        GameObject.Destroy(gameObject);
 	}
 }

@@ -14,6 +14,7 @@ public class Damage : MonoBehaviour {
 	public float delayBeforeDestroy = 0.0f;
 	public GameObject explosionPrefab;
 
+    public GameObject Spawner;
 	private float savedTime = 0;
 
 	void OnTriggerEnter(Collider collision)						// used for things like bullets, which are triggers.  
@@ -26,6 +27,7 @@ public class Damage : MonoBehaviour {
 				collision.gameObject.GetComponent<Health> ().ApplyDamage (damageAmount);
 		
 				if (destroySelfOnImpact) {
+
 					Destroy (gameObject, delayBeforeDestroy);	  // destroy the object whenever it hits something
 				}
 			
@@ -47,6 +49,8 @@ public class Damage : MonoBehaviour {
 				collision.gameObject.GetComponent<Health> ().ApplyDamage (damageAmount);
 			
 				if (destroySelfOnImpact) {
+                    
+                    Spawner.GetComponent<SpawnGameObjects>().NumBalls--;
 					Destroy (gameObject, delayBeforeDestroy);	  // destroy the object whenever it hits something
 				}
 			

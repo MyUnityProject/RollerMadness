@@ -5,6 +5,11 @@ public class SpawnGameObjects : MonoBehaviour {
 
 	public GameObject spawnPrefab;
 
+    [SerializeField]
+    int MaxBalls = 1;
+
+    public int NumBalls = 0;
+    public bool Active = true;
 	public float minSecondsBetweenSpawning = 3.0f;
 	public float maxSecondsBetweenSpawning = 6.0f;
 	
@@ -21,7 +26,7 @@ public class SpawnGameObjects : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time - savedTime >= secondsBetweenSpawning) // is it time to spawn again?
+		if (Time.time - savedTime >= secondsBetweenSpawning && Active && NumBalls < MaxBalls) // is it time to spawn again?
 		{
 			MakeThingToSpawn();
 			savedTime = Time.time; // store for next spawn
@@ -33,11 +38,12 @@ public class SpawnGameObjects : MonoBehaviour {
 	{
 		// create a new gameObject
 		GameObject clone = Instantiate(spawnPrefab, transform.position, transform.rotation) as GameObject;
-
+        clone.GetComponent<Damage>().Spawner = gameObject;
 		// set chaseTarget if specified
 		if ((chaseTarget != null) && (clone.gameObject.GetComponent<Chaser> () != null))
 		{
 			clone.gameObject.GetComponent<Chaser>().SetTarget(chaseTarget);
 		}
+        NumBalls++;
 	}
 }

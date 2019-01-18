@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
 	public Text mainScoreDisplay;
 	public GameObject gameOverCanvas;
 	public Text gameOverScoreDisplay;
+    public GameObject tutorialCanvas;
+    public Text tutorialScoreDisplay;
 
 	[Tooltip("Only need to set if canBeatLevel is set to true.")]
 	public GameObject beatLevelCanvas;
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviour {
 		gameOverCanvas.SetActive (false);
 		if (canBeatLevel)
 			beatLevelCanvas.SetActive (false);
+        if (tutorialCanvas)
+            tutorialCanvas.SetActive(false);
+        
 	}
 
 	void Update () {
